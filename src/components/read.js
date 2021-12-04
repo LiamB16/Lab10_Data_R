@@ -8,7 +8,7 @@ class Read extends Component
         super();
         this.ReloadData = this.ReloadData.bind(this);
     }
-
+     //loads data for first time
     ReloadData(){
         axios.get('http://localhost:4000/api/movies')
         .then((response)=>{
@@ -18,11 +18,11 @@ class Read extends Component
             console.log(error);
         });
     }
-
+    //reloads data if page is refreshed
     componentDidMount(){
         axios.get('http://localhost:4000/api/movies')
         .then((response)=>{
-            this.setState({mymovies: response.data})
+            this.setState({mymovies: response.data}) //gets data array from json file
         })
         .catch((error)=>{
             console.log(error);
@@ -30,7 +30,7 @@ class Read extends Component
     }
 
     state = {
-        mymovies: []            
+        mymovies: [] //mymovies is the array of json blob      
     };
 
     render(){

@@ -10,22 +10,23 @@ class MovieItem extends Component {
         super();
         this.DeleteMovie = this.DeleteMovie.bind(this);
     }
-
+   //deletes movie from database
     DeleteMovie(){
         console.log('Delete: '+this.props.movie._id);
 
         axios.delete('http://localhost:4000/api/movies/'+this.props.movie._id)
         .then(()=>{
+            //refresh web page once deltion is complete
             this.props.ReloadData();
         })
         .catch();
 
     }
-
+   //prompts user for input
     render() {
         return (
             <div>
-                {/* some comments  */}
+               
                 <Card>
                     <Card.Header>{this.props.movie.Title}</Card.Header>
                     <Card.Body>

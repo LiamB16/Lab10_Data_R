@@ -3,6 +3,7 @@ const app = express()
 const port = 4000
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 app.use(cors());
 app.use(function(req, res, next) {
@@ -12,6 +13,10 @@ res.header("Access-Control-Allow-Headers",
 "Origin, X-Requested-With, Content-Type, Accept");
 next();
 });
+
+//includes build folder
+app.use(express.static(path.join(_dirname), '../build'))
+app.use('./static',express.static(path.join(_dirname), 'build//static'))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -41,7 +46,7 @@ const movieModel = mongoose.model('martindfgdfgdfg', movieSchema);
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
-
+//adds movie to database
 app.post('/api/movies', (req,res)=>{
     console.log(req.body);
     console.log(req.body.Title);
@@ -55,7 +60,7 @@ app.post('/api/movies', (req,res)=>{
     });
     res.send('Data Sent to Server!')
 })
-
+//shows all movies in database
 app.get('/api/movies/:id',(req, res)=>{
     console.log(req.params.id);
 
@@ -63,7 +68,7 @@ app.get('/api/movies/:id',(req, res)=>{
         res.json(data);
     })
 })
-
+//deletes movie from movie list
 app.delete('/api/movies/:id', (req, res)=>{
     console.log('Deleteing : '+req.params.id);
 
@@ -74,7 +79,7 @@ app.delete('/api/movies/:id', (req, res)=>{
             res.send(data);
         })
 })
-
+//updates current database
 app.put('/api/movies/:id',(req, res)=>{
     console.log('update');
     console.log(req.body);
@@ -98,7 +103,10 @@ app.get('/api/movies', (req, res) => {
       
 })
 
-
+//shows front end of application
+app.get('*', (req, res)=> {
+    res.sendFile(path.join(_dirname+'/../buld/index.html'))
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

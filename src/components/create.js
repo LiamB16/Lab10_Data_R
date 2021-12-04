@@ -19,7 +19,7 @@ class Create extends Component {
         console.log("Name: " +this.state.Title+
         " Year: " + this.state.Year +
         "Poster: " + this.state.Poster);
-
+         //creates new movie variable to add movies to database
         const NewMovie = {
             Title: this.state.Title,
             Year: this.state.Year,
@@ -41,22 +41,25 @@ class Create extends Component {
             Poster:''
         });
     }
+    //sets title
     onChangeMovieName(event) {
         this.setState({
             Title: event.target.value
         })
     }
+    //sets year of release 
     onChangeMovieYear(event) {
         this.setState({
             Year: event.target.value
         })
     }
+    //sets poster url
     onChangeMoviePoster(event){
         this.setState({
             Poster: event.target.value
         })
     }
-
+    //Prompts user for input
     render() {
         return (
             <div>

@@ -5,6 +5,7 @@ import axios from 'axios';
 class Edit extends Component {
     constructor() {
         super();
+        //uses constructors and .bind to save new changes mad
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeMovieName = this.onChangeMovieName.bind(this);
         this.onChangeMovieYear = this.onChangeMovieYear.bind(this);
@@ -15,7 +16,7 @@ class Edit extends Component {
             Poster: ''
         }
     }
-
+    //loads data for first time
     componentDidMount(){
         axios.get('http://localhost:4000/api/movies/'+ this.props.match.params.id)
         .then((response)=>{
@@ -52,22 +53,25 @@ class Edit extends Component {
             Poster:''
         });
     }
+    //changes title
     onChangeMovieName(event) {
         this.setState({
             Title: event.target.value
         })
     }
+    //changes year of release
     onChangeMovieYear(event) {
         this.setState({
             Year: event.target.value
         })
     }
+    //changes poster url
     onChangeMoviePoster(event){
         this.setState({
             Poster: event.target.value
         })
     }
-
+    //prompts user for input
     render() {
         return (
             <div>
