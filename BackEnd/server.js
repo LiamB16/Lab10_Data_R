@@ -15,7 +15,7 @@ next();
 });
 
 //includes build folder
-app.use(express.static(path.join(_dirname), '../build'))
+app.use(express.static(path.join(__dirname), '../build'))
 app.use('./static',express.static(path.join(_dirname), 'build//static'))
 
 // parse application/x-www-form-urlencoded
